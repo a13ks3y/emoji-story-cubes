@@ -109,7 +109,7 @@ button {
 
 @media (max-width: 1024px) {
     html, body {
-        font-size: 12px;
+        font-size: 18px;
     }
     main {
         grid-template-rows: repeat(3, 7.77rem);
