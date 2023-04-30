@@ -1,0 +1,157 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+    background-image:linear-gradient(to bottom, #A7A7A7 0%, #E4E4E4 51%);
+    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    font-size:12px;
+    height:100vh;
+    margin:0px;
+    padding:0px;
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+/*     text-transform:uppercase; */
+    width:100%;
+    text-align: center;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-image:linear-gradient(to bottom, #666 0%, #b1b1b1 51%);
+    }
+}
+
+
+html, body {
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0; top: 0;
+    right: 0; bottom: 0;
+    overflow: hidden;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+header, main, h1, h3, p {
+    padding: 0.666rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    user-select: none;
+    display: grid;
+    flex: 1;
+    grid-template-rows: repeat(3, 13.666rem);
+    grid-template-columns: repeat(3, 13.666rem);
+}
+main .qube {
+    width: 13rem;
+    height: 13rem;
+    font-size: 7.77rem;
+    background: radial-gradient(
+            rgba(127, 127, 127, 0.44) 27%,
+            rgba(32, 32, 32, 0.3) 100%
+    );
+    border: 1px solid black;
+}
+
+h1 {
+    font-size: 3.666rem;
+}
+
+h3 {
+    font-size: 2.666rem;
+}
+
+p {
+    font-size: 1.666rem;
+}
+
+button {
+    padding: 0.666rem;
+}
+
+@media (max-width: 1024px) {
+    html, body {
+        font-size: 12px;
+    }
+    main {
+        grid-template-rows: repeat(3, 7.77rem);
+        grid-template-columns: repeat(3, 7.77rem);
+    }
+    main .qube {
+        width: 7.2rem;
+        height: 7.2rem;
+        font-size: 4.666rem;
+    }
+}
+
+@media (max-width: 720px) {
+    html, body {
+        font-size: 10px;
+    }
+    main {
+        grid-template-rows: repeat(3, 6.99rem);
+        grid-template-columns: repeat(3, 6.99rem);
+    }
+    main .qube {
+        width: 6.66rem;
+        height: 6.66rem;
+        font-size: 3.333rem;
+    }
+}
+
+@media (max-width: 420px) {
+    html, body {
+        font-size: 8px;
+    }
+    main {
+        grid-template-rows: repeat(3, 9.99rem);
+        grid-template-columns: repeat(3, 9.99rem);
+    }
+    main .qube {
+        width: 9.99rem;
+        height: 9.99rem;
+        font-size: 6.66rem;
+        line-height: 9.99rem;
+        vertical-align: middle;
+    }
+}
+
+
