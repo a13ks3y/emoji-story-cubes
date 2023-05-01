@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+<!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Emoji Story Cubes. The aim of the game is to tell a story from the images.">
     <link rel="stylesheet" href="css/index.css">
     <title>Tell a story!</title>
 </head>
 <body>
 <header>
-    <h1>The Emojy Story Cubes</h1>
+    <h1>The Emoji Story Cubes</h1>
     <h3 class="blink">Tap anywhere to generate new story!</h3>
 </header>
 <div class="wrapper">
@@ -30,8 +31,10 @@
     </main>
 </div>
 <footer>
+    <article>
+        <p id="story-text"></p>
+    </article>
     <button id="btn-share">Share</button>
-    <h3>The aim of the game is to tell a story from the images.</h3>
 </footer>
 <script src="cordova.js"></script>
 <script src="js/index.js"></script>

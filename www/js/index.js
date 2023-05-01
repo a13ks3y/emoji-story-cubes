@@ -7,6 +7,82 @@ function onDeviceReady() {
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 }
 
+const btnShare = document.getElementById('btn-share');
+
+btnShare.addEventListener('click', shareHandler);
+btnShare.addEventListener('touchend', shareHandler); // ???
+function navigatorShareFallBack(emojiStr, emojiUrl, emojiText) {
+    if (!navigator['share']) return;
+    navigator.share({
+        'title': `Here the story: ${emojiStr}`,
+        'text': emojiText,
+        'url': emojiUrl
+    }).then(() => {
+        console.log('Successful share!');
+    }).catch(error => {
+        console.error('Error sharing:', error)
+    });
+}
+
+function shareHandler() {
+    const emojiStr = $qubes.map($q => $q.textContent).join();
+    const emojiUrl = `https://a13ks3y.github.io/estc#${emojiStr}`;
+    const emojiText = document.getElementById('story-text').innerHTML;
+    if (!window['plugins'] || !window['plugins']['socialsharing']) {
+        return navigatorShareFallBack(emojiStr, emojiUrl, emojiText);
+    }
+    window.plugins.socialsharing.shareWithOptions(
+        {
+            message: 'Here the story: ' + emojiStr,
+            subject: emojiText,
+            url: emojiUrl,
+            files: []
+        },
+        () => console.log('Shared!'),
+        e => console.error(e)
+    );
+}
+
+const $qubes = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9
+].map(n => document.getElementById(`qube-${n}`));
+
+const ROUNDS = 9;
+const ALL_EMOJIS = generateAllEmojiCodes();
+function generateRandomSet() {
+    const emojis = generateAllEmojiCodes();
+    const result = [];
+    for(let i=1; i <= ROUNDS; i++) {
+        result.push(emojis.splice(Math.floor(Math.random() * emojis.length), 1));
+    }
+    return result;
+}
+
+
+async function shuffle() {
+    const changes = [];
+    const randomSet = generateRandomSet();
+
+    for (let i = 1; i <= ROUNDS; i++) {
+        changes.push(new Promise(resolve => {
+            setTimeout(() => {
+                $qubes.forEach($qube => {
+                    const code = ALL_EMOJIS[Math.floor(Math.random() * ALL_EMOJIS.length)];
+                    $qube.innerHTML = `&#${code};`;
+                });
+                resolve();
+            }, i * 666);
+        }));
+    }
+    const text = requestStory(randomSet).then(result => {
+        const storyTextEl = document.getElementById('story-text');
+        storyTextEl.textContent = result;
+    });
+    Promise.all([...changes, text]).then(() => {
+        $qubes.forEach(($q, i) => $q.innerHTML = `&#${randomSet[i]};`);
+    });
+}
+
 function generateAllEmojiCodes() {
     const result = [];
     const emojiRange = [
@@ -43,37 +119,6 @@ function generateAllEmojiCodes() {
     return result;
 }
 
-const btnShare = document.getElementById('btn-share');
-btnShare.addEventListener('click', () => {
-    if (!navigator['share']) return;
-    navigator.share({
-        'title': 'The catch-title-share-text, to be done.',
-        'text': 'Optional message',
-        'url': `https://a13ks3y.github.io/emoji-story-coubes/index.html#todo`
-    }).then(() => {
-        console.log('Successful share!');
-    }).catch(error => {
-        console.error('Error sharing:', error)
-    });
-});
-
-const $qubes = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9
-].map(n => document.getElementById(`qube-${n}`));
-const ROUNDS = 9;
-
-function shuffle() {
-    const VALUES = generateAllEmojiCodes();
-    for (let i = 1; i <= ROUNDS; i++) {
-        setTimeout(() => {
-            $qubes.forEach($qube => {
-                const code = VALUES.splice(Math.floor(Math.random() * VALUES.length), 1)[0];
-                $qube.innerHTML = `&#${code};`;
-            });
-        }, i * 666);
-    }
-}
-
 const tapArea = document.getElementById('tap-area');
 tapArea.addEventListener('click', shuffle);
 tapArea.addEventListener('touchend', shuffle);
@@ -82,8 +127,7 @@ shuffle();
 
 // @todo: move to separate file?
 
-async function requestStory() {
-    const emojisStr = $qubes.map($q => $q.textContent).join();
+async function requestStory(emojisStr) {
     const url = 'https://chatgpt-best-price.p.rapidapi.com/v1/chat/completions';
     const options = {
         method: 'POST',
@@ -106,9 +150,19 @@ async function requestStory() {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result.choices[0].message.content);
+        return result.choices[0].message.content;
     } catch (error) {
         console.error(error);
     }
 
 }
+
+
+/*
+*  Generate 9 random emojis
+*  Make request for a story to chatGPT
+*  Show shuffling
+*
+*
+*
+* */

@@ -160,4 +160,14 @@ button {
     }
 }
 
+footer article {
+    padding: 0.333rem 0;
+    max-height: 21rem;
+    overflow-y: auto;
+    text-align: left;
+}
+footer article p {    
+    padding: 0 3.666rem;
+}
+
 
