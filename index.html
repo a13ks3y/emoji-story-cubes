@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Emoji Story Cubes</title>
+    <style type="text/css">
+        html, body {
+            font-family: monospace, Consolas;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        @keyframes bgPosition {
+            0% {
+                background-position: 0px center;
+
+            }
+            50% {
+                background-position: 666px center;
+            }
+            100% {
+                background-position: 0px center;
+            }
+        }
+
+        @keyframes bgVPosition {
+            0% {
+                background-position: center 0;
+
+            }
+            50% {
+                background-position: center 666px;
+            }
+            100% {
+                background-position: center 0;
+            }
+        }
+
+        html {
+            background-image: url("img/cloudSimple.svg");
+            background-repeat: round;
+            background-size: contain;
+            background-blend-mode: screen;
+            background-color: rgba(0, 255, 255, 0.666);
+            background-position: 0px center;
+            animation-name: bgPosition;
+            animation-duration: 6.66s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        body {
+            background-image: url("img/cloudSimple.svg");
+            background-repeat: round;
+            background-size: auto;
+            background-blend-mode: screen;
+            background-color: rgba(0, 255, 255, 0.666);
+            background-position: center 0px;
+            animation-name: bgVPosition;
+            animation-duration: 6.66s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+
+        }
+
+        h1 {
+            margin-top: 3.666rem;
+            text-align: center;
+            line-height: 6.333rem;
+            box-shadow: 0 0 3.666rem black;
+            background-color: rgba(0, 255, 255, 0.666);
+        }
+
+        img {
+            max-width: 96.66vw;
+            display: block;
+            margin: auto;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<h1>The Emoji Story Cubes</h1>
+<canvas id="ctx" width="333" height="320"></canvas>
+<a href="tbd" target="_blank">
+    <img src="./img/Google_Play-Badge-Logo.wine.svg" alt="Get It on Google Play!"/>
+</a>
+<script src="./www/js/generateAllEmojiCodes.js"></script>
+<script>
+    const hash = window.location.hash.substr(1);
+    if (hash && hash.length) {
+
+    }
+    const ctx = document.getElementById('ctx').getContext('2d');
+    const ALL_EMOJI_CODES = generateAllEmojiCodes();
+
+    function render() {
+        //ctx.fillStyle = 'rgba(0, 0, 0, 1.0)';
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        const fontSize = 66;
+        const gap = 33;
+        ctx.font = `${fontSize}px monospace`;
+        ctx.fillStyle = 'rgba(255,255,255,1)';
+
+        for (let r = 0; r < 3; r++) {
+            for (let c = 0; c < 3; c++) {
+                const x = c * (fontSize + gap) + (fontSize * 0.35);
+                const y = r * (fontSize + gap) + (fontSize * 1.25);
+                const v = String.fromCodePoint(ALL_EMOJI_CODES[~~(Math.random() * ALL_EMOJI_CODES.length)]);
+                ctx.fillText(v, x, y);
+            }
+        }
+    }
+    render();
+    let lastTick = Date.now();
+    requestAnimationFrame(function loop() {
+        const dt = Date.now() - lastTick;
+        if (dt > 3666) {
+            render();
+            lastTick = Date.now();
+        }
+        requestAnimationFrame(loop);
+    });
+</script>
+</body>
+</html>
