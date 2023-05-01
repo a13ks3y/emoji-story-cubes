@@ -19,8 +19,8 @@ there is two possible solutions:
 * Use React/ReactNative (?)
 * Switch to capacitor (?)
 ~~* Fix some emojis not visible on Android (!)~~
-* Fix share button isn't touchable (!!!)
-* Use cordova-social-share plugin properly
+~~* Fix share button isn't touchable (!!!)~~
+~~* Use cordova-social-share plugin properly~~
 * Share feature. Choose implementation (implement both?)
 
 
