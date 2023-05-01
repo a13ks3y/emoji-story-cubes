@@ -6,13 +6,15 @@
   "main": "index.js",
   "scripts": {
     "start": "npx live-server ./www",
+    "build": "npx cordova build android browser --debug --device && node post-build.js",
+    "build:prod": "npx cordova build android browser --release && node post-build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
+  "author": "Oleksii Smirnov",
+  "license": "private",
   "devDependencies": {
     "cordova-android": "^10.1.2",
     "cordova-browser": "^6.0.0",

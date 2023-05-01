@@ -1,5 +1,6 @@
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    box-sizing: border-box;
 }
 
 body {
@@ -58,8 +59,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-evenly;
     align-content: space-between;
 }
 
@@ -79,6 +80,7 @@ main {
     flex: 1;
     grid-template-rows: repeat(3, 13.666rem);
     grid-template-columns: repeat(3, 13.666rem);
+    grid-gap: 1.666rem;
 }
 main .qube {
     width: 13rem;
@@ -89,6 +91,8 @@ main .qube {
             rgba(32, 32, 32, 0.3) 100%
     );
     border: 1px solid black;
+    border-radius: 0.666rem;
+    box-shadow: 0 0 1.666rem #666;
 }
 
 h1 {
@@ -151,6 +155,8 @@ button {
         font-size: 6.66rem;
         line-height: 9.99rem;
         vertical-align: middle;
+        border-radius: 0.666rem;
+        box-shadow: 0 0 1.666rem #666;
     }
 }
 

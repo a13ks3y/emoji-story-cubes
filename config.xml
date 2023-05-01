@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.github.a13ks3y.emojyStoryCubes" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.github.a13ks3y.emojiStoryCubes" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Emoji Story Cubes</name>
     <description>Sample Apache Cordova App</description>
-    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
+    <author email="a13ks3y.ass@gmail.com" href="https://a13ks3y.github.io/">
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <allow-intent href="jhttp://*/*" />
+    <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 </widget>
