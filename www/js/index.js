@@ -14,7 +14,7 @@ btnShare.addEventListener('touchend', shareHandler); // ???
 function navigatorShareFallBack(emojiStr, emojiUrl, emojiText) {
     if (!navigator['share']) return;
     navigator.share({
-        'title': `Here the story: ${emojiStr}`,
+        'title': `Here the story: ${emojiStr}\n`,
         'text': emojiText,
         'url': emojiUrl
     }).then(() => {
@@ -26,9 +26,10 @@ function navigatorShareFallBack(emojiStr, emojiUrl, emojiText) {
 
 const storyTextEl = document.getElementById('story-text');
 function shareHandler() {
-    const emojiStr = $qubes.map($q => $q.textContent).join();
-    const emojiUrl = `https://a13ks3y.github.io/estc#${emojiStr}`;
-    const emojiText = storyTextEl.innerHTML;
+    const emojiHash = randomSet.map(code => Number(code).toString(16)).join('-');
+    const emojiStr = randomSet.map(code => String.fromCodePoint(code));
+    const emojiUrl = `https://a13ks3y.github.io/emoji-story-cubes/#${emojiHash}`;
+    const emojiText = storyTextEl.textContent;
     if (!window['plugins'] || !window['plugins']['socialsharing']) {
         return navigatorShareFallBack(emojiStr, emojiUrl, emojiText);
     }
@@ -128,7 +129,7 @@ btnCopy.addEventListener('click', () => {
     if (!storyTextEl || !textToCopy) return false;
     if (window['cordova']) {
         cordova.plugins.clipboard.copy(textToCopy);
-    } else if (window['copy']) {
-        window['copy'](textToCopy);
+    } else if (window['navigator'] && window['navigator']['clipboard']) {
+        window.navigator.clipboard.writeText(textToCopy);
     }
 });
