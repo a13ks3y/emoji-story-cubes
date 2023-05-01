@@ -2,6 +2,7 @@
 The Story Cubes game, but emojis using for dice-faces instead.
 Inspired by [story cubes](https://www.storycubes.com/en/games/rorys-story-cubes-classic/)
 
+[Home Page](https://a13ks3y.github.io/emoji-story-cubes/)
 ### AI generation feature
 Just an API call to ChatGPT or similar service.
 ### Share feature

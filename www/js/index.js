@@ -24,10 +24,11 @@ function navigatorShareFallBack(emojiStr, emojiUrl, emojiText) {
     });
 }
 
+const storyTextEl = document.getElementById('story-text');
 function shareHandler() {
     const emojiStr = $qubes.map($q => $q.textContent).join();
     const emojiUrl = `https://a13ks3y.github.io/estc#${emojiStr}`;
-    const emojiText = document.getElementById('story-text').innerHTML;
+    const emojiText = storyTextEl.innerHTML;
     if (!window['plugins'] || !window['plugins']['socialsharing']) {
         return navigatorShareFallBack(emojiStr, emojiUrl, emojiText);
     }
@@ -49,7 +50,7 @@ const $qubes = [
 
 const ROUNDS = 9;
 const ALL_EMOJIS = generateAllEmojiCodes();
-
+let randomSet;
 function generateRandomSet() {
     const emojis = generateAllEmojiCodes();
     const result = [];
@@ -65,7 +66,7 @@ async function shuffle() {
     if (isShuffling) return;
     isShuffling = true;
     const changes = [];
-    const randomSet = generateRandomSet();
+    randomSet = generateRandomSet();
 
     for (let i = 1; i <= ROUNDS; i++) {
         changes.push(new Promise(resolve => {
@@ -79,49 +80,12 @@ async function shuffle() {
         }));
     }
     const text = requestStory(randomSet.map(code => String.fromCodePoint(code))).then(result => {
-        const storyTextEl = document.getElementById('story-text');
         storyTextEl.textContent = result;
     });
     Promise.all([...changes, text]).then(() => {
         $qubes.forEach(($q, i) => $q.innerHTML = `&#${randomSet[i]};`);
         isShuffling = false;
     }).catch(() => isShuffling = false);
-}
-
-function generateAllEmojiCodes() {
-    const result = [];
-    const emojiRange = [
-        [0x261D, 0x261D],
-        [0x270A, 0x270D],
-        [0x1F300, 0x1F320],
-        //[0x1F324, 0x1F32b], // weather
-        [0x1F32d, 0x1F394],
-        [0x1F3A0, 0x1F3BF],
-        [0x1F3E1, 0x1F3F1],
-        [0x1F400, 0x1F4FF],
-
-
-        [0x1F506, 0x1F518],
-        [0x1F525, 0x1f52F],
-        [0x1F595, 0x1F596], // :)
-
-        [0x1f600, 0x1F636],
-        [0x1f636, 0x1F650],
-        [0x1f680, 0x1F6BF],
-        [0x1F910, 0x1F94C],
-        [0x1F950, 0x1F9E6],
-        // ???
-        // [0x1F3D0, 0x1F3E0],
-
-    ];
-
-    for (let i = 0; i < emojiRange.length; i++) {
-        const range = emojiRange[i];
-        for (let x = range[0]; x < range[1]; x++) {
-            result.push(x);
-        }
-    }
-    return result;
 }
 
 const tapArea = document.getElementById('tap-area');
@@ -160,15 +124,11 @@ async function requestStory(emojisStr) {
 
 const btnCopy = document.getElementById('btn-copy');
 btnCopy.addEventListener('click', () => {
-    
+    const textToCopy = storyTextEl ? storyTextEl.textContent : null;
+    if (!storyTextEl || !textToCopy) return false;
+    if (window['cordova']) {
+        cordova.plugins.clipboard.copy(textToCopy);
+    } else if (window['copy']) {
+        window['copy'](textToCopy);
+    }
 });
-
-
-/*
-*  Generate 9 random emojis
-*  Make request for a story to chatGPT
-*  Show shuffling
-*
-*
-*
-* */
