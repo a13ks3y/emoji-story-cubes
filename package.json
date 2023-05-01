@@ -19,6 +19,7 @@
     "cordova-android": "^10.1.2",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-device": "^2.1.0",
+    "es6-promise-plugin": "^4.2.2",
     "web": "^0.0.2"
   },
   "cordova": {
@@ -27,7 +28,8 @@
       "android"
     ],
     "plugins": {
-      "cordova-plugin-device": {}
+      "cordova-plugin-device": {},
+      "cordova-plugin-x-socialsharing": {}
     }
   },
   "dependencies": {

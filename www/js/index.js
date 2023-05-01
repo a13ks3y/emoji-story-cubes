@@ -49,17 +49,21 @@ const $qubes = [
 
 const ROUNDS = 9;
 const ALL_EMOJIS = generateAllEmojiCodes();
+
 function generateRandomSet() {
     const emojis = generateAllEmojiCodes();
     const result = [];
-    for(let i=1; i <= ROUNDS; i++) {
+    for (let i = 1; i <= ROUNDS; i++) {
         result.push(emojis.splice(Math.floor(Math.random() * emojis.length), 1));
     }
     return result;
 }
 
-
+let isShuffling = false; // Every day I'm shuffling, shuffling...
 async function shuffle() {
+    // Prevent running multiple times
+    if (isShuffling) return;
+    isShuffling = true;
     const changes = [];
     const randomSet = generateRandomSet();
 
@@ -74,13 +78,14 @@ async function shuffle() {
             }, i * 666);
         }));
     }
-    const text = requestStory(randomSet).then(result => {
+    const text = requestStory(randomSet.map(code => String.fromCodePoint(code))).then(result => {
         const storyTextEl = document.getElementById('story-text');
         storyTextEl.textContent = result;
     });
     Promise.all([...changes, text]).then(() => {
         $qubes.forEach(($q, i) => $q.innerHTML = `&#${randomSet[i]};`);
-    });
+        isShuffling = false;
+    }).catch(() => isShuffling = false);
 }
 
 function generateAllEmojiCodes() {
@@ -122,11 +127,7 @@ function generateAllEmojiCodes() {
 const tapArea = document.getElementById('tap-area');
 tapArea.addEventListener('click', shuffle);
 tapArea.addEventListener('touchend', shuffle);
-// @todo: check url, and if hash value is set, use it
 shuffle();
-
-// @todo: move to separate file?
-
 async function requestStory(emojisStr) {
     const url = 'https://chatgpt-best-price.p.rapidapi.com/v1/chat/completions';
     const options = {
@@ -156,6 +157,11 @@ async function requestStory(emojisStr) {
     }
 
 }
+
+const btnCopy = document.getElementById('btn-copy');
+btnCopy.addEventListener('click', () => {
+    
+});
 
 
 /*
