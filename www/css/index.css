@@ -90,7 +90,10 @@ header, main, h1, h3, p {
     align-items: center;
     justify-content: center;
 }
-
+#spinner {
+    display: block;
+    margin: auto;
+}
 main {
     user-select: none;
     display: grid;
@@ -157,6 +160,16 @@ footer {
     justify-content: space-between;
     flex-grow: 1;
     
+}
+
+@media (orientation: landscape) and (hover: none) {
+    body {
+        flex-direction: row;
+        align-items: normal;
+    }
+    body header {
+        display: none;
+    }
 }
 
 footer article {
