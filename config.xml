@@ -1,9 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.github.a13ks3y.emojiStoryCubes" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Emoji Story Cubes</name>
-    <description>Sample Apache Cordova App</description>
+    <description>
+        Unleash your creativity and discover endless story possibilities with Emoji Story Cubes,
+        the game that generates 9 random emojis to inspire your storytelling!
+        Just roll the dice and let the emojis guide your imagination as you craft your own unique tales.
+        Plus, with the game's built-in story generator, you can get inspiration or just sit back and enjoy the fun. Inspired by the popular 'Story Cubes' game, Emoji Story Cubes is the perfect way to spark your creativity and have fun with friends and family.
+    </description>
     <author email="a13ks3y.ass@gmail.com" href="https://a13ks3y.github.io/">
-        Apache Cordova Team
+        Oleksii Smirnov
     </author>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
