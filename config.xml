@@ -13,4 +13,5 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <icon src="www\img\logo.png"></icon>
 </widget>
