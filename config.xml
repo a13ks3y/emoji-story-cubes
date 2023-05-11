@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.github.a13ks3y.emojiStoryCubes" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.github.a13ks3y.emojiStoryCubes" android-targetSdkVersion="31" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Emoji Story Cubes</name>
     <description>
         Unleash your creativity and discover endless story possibilities with Emoji Story Cubes,
