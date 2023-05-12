@@ -69,7 +69,6 @@
             animation-duration: 6.66s;
             animation-timing-function: ease-in-out;
             animation-iteration-count: infinite;
-
         }
 
         h1 {
@@ -82,6 +81,7 @@
 
         img {
             max-width: 96.66vw;
+            max-height: calc(100vh - 333px - 12rem);
             display: block;
             margin: auto;
         }
@@ -89,6 +89,7 @@
         body {
             display: flex;
             flex-direction: column;
+            justify-content: space-evenly;
         }
 
         canvas {
@@ -99,8 +100,8 @@
 </head>
 <body>
 <h1>The Emoji Story Cubes</h1>
-<canvas id="ctx" width="333" height="320"></canvas>
-<a href="tbd" target="_blank">
+<canvas id="ctx" width="333" height="333"></canvas>
+<a href="https://play.google.com/store/apps/details?id=io.github.a13ks3y.emojiStoryCubes" target="_blank">
     <img src="./img/Google_Play-Badge-Logo.wine.svg" alt="Get It on Google Play!"/>
 </a>
 <script src="./www/js/generateAllEmojiCodes.js"></script>
