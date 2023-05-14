@@ -70,28 +70,25 @@ function onDeviceReady() {
         const changes = [];
         randomSet = generateRandomSet();
 
-        for (let i = 1; i <= ROUNDS; i++) {
-            changes.push(new Promise(resolve => {
-                setTimeout(() => {
-                    $cubes.forEach($qube => {
-                        const code = ALL_EMOJIS[Math.floor(Math.random() * ALL_EMOJIS.length)];
-                        $qube.innerHTML = `&#${code};`;
-                    });
-                    resolve();
-                }, i * 666);
-            }));
-        }
         spinnerEl.scrollIntoView({behavior: "smooth"});
         const text = requestStory(randomSet.map(code => String.fromCodePoint(code))).then(result => {
             storyTextEl.textContent = result;
         });
-        Promise.all([...changes, text]).then(() => {
+        const shuffleInterval = setInterval(()=>{
+            $cubes.forEach($qube => {
+                const code = ALL_EMOJIS[Math.floor(Math.random() * ALL_EMOJIS.length)];
+                $qube.innerHTML = `&#${code};`;
+            });
+        }, 666);
+        text.then(() => {
             $cubes.forEach(($q, i) => $q.innerHTML = `&#${randomSet[i]};`);
             isShuffling = false;
             spinnerEl.style.display = "none";
+            clearInterval(shuffleInterval);
         }).catch((e) => {
             isShuffling = false;
             spinnerEl.style.display = "none";
+            clearInterval(shuffleInterval);
             alert(e.message);
         });
     }
@@ -114,5 +111,8 @@ function onDeviceReady() {
         }
     });
 
+    const btnReload =document.getElementById('btn-reload');
+    btnReload.addEventListener('click', shuffle);
+    btnReload.addEventListener('touchend', shuffle);
     shuffle();
 }
