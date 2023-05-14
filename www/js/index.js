@@ -1,6 +1,9 @@
-document.addEventListener('deviceready', onDeviceReady, false);
 if (!window["cordova"]) document.addEventListener('readystatechange', onDeviceReady, false);
+else document.addEventListener('deviceready', onDeviceReady, false);
+let initialized = false;
 function onDeviceReady() {
+    if (initialized) return;
+    initialized = true;
     const spinnerEl = document.getElementById('spinner');
 
     const btnShare = document.getElementById('btn-share');
@@ -78,6 +81,7 @@ function onDeviceReady() {
                 }, i * 666);
             }));
         }
+        spinnerEl.scrollIntoView({behavior: "smooth"});
         const text = requestStory(randomSet.map(code => String.fromCodePoint(code))).then(result => {
             storyTextEl.textContent = result;
         });

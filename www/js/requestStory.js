@@ -4,7 +4,7 @@ async function requestStory(emojisStr) {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
-            'X-RapidAPI-Key': '800afd36a8mshaefcd630686ba6dp1cab7bjsnd0a31eab74be',
+            'X-RapidAPI-Key': '8bc16a1390mshd21ad0dd0e6dfd4p14d1d5jsna481e63480cc',
             'X-RapidAPI-Host': 'chatgpt-best-price.p.rapidapi.com'
         },
         body: JSON.stringify({
