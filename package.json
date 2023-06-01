@@ -1,13 +1,13 @@
 {
   "name": "io.github.a13ks3y.emojistorycubes",
   "displayName": "Emoji Sotry Cubes",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Emoji story qubes game is a fun and addictive game that generates stories using emojis. The game is designed to test your creativity and imagination, and provides hours of entertainment. With the ability to share and download stories, Emoji story qubes game is perfect for those who love to create and share stories with their friends and family.",
   "main": "index.js",
   "scripts": {
     "start": "npx live-server ./www",
     "build": "npx cordova build android browser --debug --device && node post-build.js",
-    "build:prod": "npx cordova build android --release",
+    "build:prod": "npx cordova build android --release && node post-build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
