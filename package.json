@@ -1,7 +1,7 @@
 {
   "name": "io.github.a13ks3y.emojistorycubes",
   "displayName": "Emoji Sotry Cubes",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Emoji story qubes game is a fun and addictive game that generates stories using emojis. The game is designed to test your creativity and imagination, and provides hours of entertainment. With the ability to share and download stories, Emoji story qubes game is perfect for those who love to create and share stories with their friends and family.",
   "main": "index.js",
   "scripts": {

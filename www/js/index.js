@@ -67,12 +67,15 @@ function onDeviceReady() {
         if (isShuffling) return;
         isShuffling = true;
         spinnerEl.style.display = "block";
-        const changes = [];
+        storyTextEl.innerHTML = '';
         randomSet = generateRandomSet();
 
         spinnerEl.scrollIntoView({behavior: "smooth"});
         const text = requestStory(randomSet.map(code => String.fromCodePoint(code))).then(result => {
-            storyTextEl.textContent = result;
+            storyTextEl.innerHTML = result;
+        }).catch(e => {
+            isShuffling = false;
+            storyTextEl.innerHTML = e.message;
         });
         const shuffleInterval = setInterval(()=>{
             $cubes.forEach($qube => {
@@ -81,21 +84,18 @@ function onDeviceReady() {
             });
         }, 666);
         text.then(() => {
+            clearInterval(shuffleInterval);
             $cubes.forEach(($q, i) => $q.innerHTML = `&#${randomSet[i]};`);
             isShuffling = false;
             spinnerEl.style.display = "none";
-            clearInterval(shuffleInterval);
         }).catch((e) => {
+            clearInterval(shuffleInterval);
             isShuffling = false;
             spinnerEl.style.display = "none";
-            clearInterval(shuffleInterval);
-            alert(e.message);
+            storyTextEl.innerHTML = e.message;
         });
     }
 
-    const tapArea = document.getElementById('tap-area');
-    tapArea.addEventListener('click', shuffle);
-    tapArea.addEventListener('touchend', shuffle);
     const btnCopy = document.getElementById('btn-copy');
     btnCopy.addEventListener('click', () => {
         const emojiHash = randomSet.map(code => Number(code).toString(16)).join('-');

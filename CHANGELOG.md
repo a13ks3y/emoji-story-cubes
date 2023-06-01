@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [1.2.0] - 2023-06-01
+- Do not generate new story if tap on emojis (to prevent taps by accident), please use update 🔃 button instead! 
+- Clearer title 🫧
+- Displaying error 🪲 message if network error or API-related error.
+- Clear story text before fetch new story 📚
 ## [Unreleased]
 
 ## [1.1.0] - 2023-05-12

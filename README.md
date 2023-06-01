@@ -5,6 +5,8 @@ Inspired by [story cubes](https://www.storycubes.com/en/games/rorys-story-cubes-
 [Home Page](https://a13ks3y.github.io/emoji-story-cubes/)
 ### AI generation feature
 Just an API call to ChatGPT or similar service.
+### ПЫЩЬ feature
+Do not show story text until big button pressed (nothing else is not allowed while big button is shown).  
 ### Share feature
 To make share feature working,
 there is two possible solutions:
